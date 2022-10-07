@@ -7,13 +7,10 @@ const Workout = require("../model/workoutModel");
 
 // routes
 // get all workouts
-router.get('/search', async (req, res, next) => {
-  const {workout} = req.query.workout
-
+router.get('/search', async (req, res) => {
   try {
-    const workouts = await Workout.find({workout});
+    const workouts = await Workout.find({$and:[{createdAt:{$gte: req.query.startDate}}, {createdAt:{$lte: req.query.endDate}}]});
     res.status(200).json(workouts);
-    next()
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
