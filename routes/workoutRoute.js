@@ -6,13 +6,14 @@ const router = express.Router();
 const Workout = require("../model/workoutModel");
 
 // routes
-
 // get all workouts
-router.get("/", (req, res) => {
+router.get('/search', async (req, res, next) => {
+  const {workout} = req.query.workout
 
   try {
-    const workouts = Workout.find({});
+    const workouts = await Workout.find({workout});
     res.status(200).json(workouts);
+    next()
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -20,19 +21,18 @@ router.get("/", (req, res) => {
 
 
 // get a workout
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   if(!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such workout'});
   }
 
-  const workout = await Workout.findById(id)
-
-  if(!workout){
+  const workouts = await Workout.findById(id)
+  if(!workouts){
     return res.status(404).json({error: 'No such workout'})
   }
-  res.status(200).json(workout)
+  res.status(200).json(workouts)
 });
 
 

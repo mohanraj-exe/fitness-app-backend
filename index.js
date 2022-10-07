@@ -17,7 +17,7 @@ app.get('/', (req, res, next) =>{
 })
 
 // routes
-app.use('/api/user', userRoute);
+app.use('/api/user/path', userRoute);
 app.use('/api/user/workout', workoutRoute);
 
 const port = process.env.PORT || 8081

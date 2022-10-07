@@ -10,10 +10,7 @@ const workoutSchema = new Schema({
     reps: {type: Number, required: true},
     comments: {type: String, required: true}
 
-},{timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-}}
+},{timestamps: true}
 );
 
 const Workout = mongoose.model('workout', workoutSchema);
