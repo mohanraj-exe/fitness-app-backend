@@ -22,14 +22,18 @@ const loginUser = async (req, res) => {
 
 // signup user
 const signupUser = async (req, res) => {
-  const { name, email, password, isAdmin } = req.body;
+  const { name, email, 
+          goal, age, location, height, weight, targetWeight, medicalCondition,
+          password, isAdmin } = req.body;
 
   try {
-    const user = await User.signup(name, email, password, isAdmin);
+    const user = await User.signup(name, email, 
+      goal, age, location, height, weight, targetWeight, medicalCondition, password, isAdmin);
 
     // create a token
     const token = createToken(user._id);
-    res.status(200).json({ name, email, isAdmin, token });
+    res.status(200).json({ name, email, 
+      goal, age, location, height, weight, targetWeight, medicalCondition,isAdmin, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

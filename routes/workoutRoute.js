@@ -6,7 +6,7 @@ const router = express.Router();
 const Workout = require("../model/workoutModel");
 
 // routes
-// get all workouts
+// get workouts by date range
 router.get('/search', async (req, res) => {
   try {
     const workouts = await Workout.find({$and:[{createdAt:{$gte: req.query.startDate}}, {createdAt:{$lte: req.query.endDate}}]});

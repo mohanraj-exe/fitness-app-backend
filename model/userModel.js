@@ -6,6 +6,13 @@ const validator = require("validator");
 const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    goal: { type: String, required: true},
+    age: {type: Number, required: true},
+    location: {type: String, required: true},
+    height: {type: Number, required: true},
+    weight: {type: Number, required: true},
+    targetWeight: {type: Number, required: true},
+    medicalCondition: {type: String, required: true},
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false, required: true},
   },
@@ -13,9 +20,11 @@ const userSchema = new Schema({
 );
 
 // static signup method
-userSchema.statics.signup = async function (name, email, password, isAdmin) {
+userSchema.statics.signup = async function (name, email,
+  goal, age, location, height, weight, targetWeight, medicalCondition, password, isAdmin) {
   // validation
-  if (!name && !email && !password) {
+  if (!name && !email && !password && !goal
+    && !age && !location && !height && !weight && !targetWeight && !medicalCondition) {
     throw Error("All fields must be filled");
   }
 
